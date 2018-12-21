@@ -10,7 +10,7 @@ import CommonCrypto
 
 public enum HMACAlgorithms {
 
-    public case md5, sha1, sha224, sha256, sha384, sha512
+    case md5, sha1, sha224, sha256, sha384, sha512
 
     public func digestLength() -> Int {
         var result: CInt = 0
