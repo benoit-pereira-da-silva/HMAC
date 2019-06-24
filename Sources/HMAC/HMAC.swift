@@ -73,33 +73,33 @@ public struct HMAC {
         var hash = [UInt8](repeating: 0,count: digestLength)
         switch algo {
         case .md5:
-            data.withUnsafeBytes({ (bytes: UnsafePointer<UInt8>) ->Void in
-                CC_MD5(bytes, UInt32(data.count), &hash)
+            data.withUnsafeBytes({ (bytes: UnsafeRawBufferPointer) ->Void in
+                CC_MD5(bytes.baseAddress!.assumingMemoryBound(to: UInt8.self), UInt32(data.count), &hash)
             })
             break
         case .sha1:
-            data.withUnsafeBytes({ (bytes: UnsafePointer<UInt8>) ->Void in
-                CC_SHA1(bytes, UInt32(data.count), &hash)
+            data.withUnsafeBytes({ (bytes: UnsafeRawBufferPointer) ->Void in
+                CC_SHA1(bytes.baseAddress!.assumingMemoryBound(to: UInt8.self), UInt32(data.count), &hash)
             })
             break
         case .sha224:
-            data.withUnsafeBytes({ (bytes: UnsafePointer<UInt8>) ->Void in
-                CC_SHA224(bytes, UInt32(data.count), &hash)
+            data.withUnsafeBytes({ (bytes:UnsafeRawBufferPointer) ->Void in
+                CC_SHA224(bytes.baseAddress!.assumingMemoryBound(to: UInt8.self), UInt32(data.count), &hash)
             })
             break
         case .sha256:
-            data.withUnsafeBytes({ (bytes: UnsafePointer<UInt8>) ->Void in
-                CC_SHA256(bytes, UInt32(data.count), &hash)
+            data.withUnsafeBytes({ (bytes: UnsafeRawBufferPointer) ->Void in
+                CC_SHA256(bytes.baseAddress!.assumingMemoryBound(to: UInt8.self), UInt32(data.count), &hash)
             })
             break
         case .sha384:
-            data.withUnsafeBytes({ (bytes: UnsafePointer<UInt8>) ->Void in
-                CC_SHA384(bytes, UInt32(data.count), &hash)
+            data.withUnsafeBytes({ (bytes: UnsafeRawBufferPointer) ->Void in
+                CC_SHA384(bytes.baseAddress!.assumingMemoryBound(to: UInt8.self), UInt32(data.count), &hash)
             })
             break
         case .sha512:
-            data.withUnsafeBytes({ (bytes: UnsafePointer<UInt8>) ->Void in
-                CC_SHA512(bytes, UInt32(data.count), &hash)
+            data.withUnsafeBytes({ (bytes: UnsafeRawBufferPointer) ->Void in
+                CC_SHA512(bytes.baseAddress!.assumingMemoryBound(to: UInt8.self), UInt32(data.count), &hash)
             })
             break
         }
@@ -128,27 +128,27 @@ public struct HMAC {
 
 public extension String {
 
-    public var md5: String {
+    var md5: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.md5)
     }
 
-    public var sha1: String {
+    var sha1: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.sha1)
     }
 
-    public var sha224: String {
+    var sha224: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.sha224)
     }
 
-    public var sha256: String {
+    var sha256: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.sha256)
     }
 
-    public var sha384: String {
+    var sha384: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.sha384)
     }
 
-    public var sha512: String {
+    var sha512: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.sha512)
     }
 
@@ -158,27 +158,27 @@ public extension String {
 
 public extension Data {
 
-    public var md5: String {
+    var md5: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.md5)
     }
 
-    public var sha1: String {
+    var sha1: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.sha1)
     }
 
-    public var sha224: String {
+    var sha224: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.sha224)
     }
 
-    public var sha256: String {
+    var sha256: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.sha256)
     }
 
-    public var sha384: String {
+    var sha384: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.sha384)
     }
 
-    public var sha512: String {
+    var sha512: String {
         return HMAC.digestHexString(self, algo: HMACAlgorithms.sha512)
     }
 
